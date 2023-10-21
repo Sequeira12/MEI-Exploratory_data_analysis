@@ -1,8 +1,18 @@
 # MEI-Exploratory_data_analysis
 
+# Ficheiros finais:
+-DATASET/HPC2N/HPC2N.csv
+
+-DATASET/NASA/NASA.csv
+
+-DATASET/SDSC BLUE/SDSC-BLUE.csv
+
+-DATASET/SDSC 96/SDSC96.csv
 
 
-The Data Fields:
+
+
+#The Data Fields:
 
 - 1 . Job Number -- a counter field, starting from 1.
 - 2 . Submit Time -- in seconds. The earliest time the log refers to is zero, and is usually the submittal time of the first job. The lines in the log are sorted by ascending submittal times. It makes sense for jobs to also be numbered in this order.
