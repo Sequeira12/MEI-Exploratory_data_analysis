@@ -73,7 +73,7 @@ def SemanaFileNASA(file):
     with open('DATASET/NASA/NASA.csv', 'w') as arquivo:
         arquivo.writelines(linhasAtualizadas)
 
-
+    print("NASA -- FEITO")
 
 #FEITO
 def SemanaFileHPCN(file):
@@ -86,7 +86,7 @@ def SemanaFileHPCN(file):
     mes = 5
     ano = 2002
     inicio = 6
-    contaanos = 0
+
     guardaValores = 31-28
     with open(file, 'r') as ficheiro:
         contador = 0
@@ -100,7 +100,7 @@ def SemanaFileHPCN(file):
                 horas = horas % 24
 
                 valor = int(SubmitTime) // segundosDia
-                #print(valor)
+
 
                 diaAux = (valor - somaDiasMeses  + dia)
                 DiaF = diaAux
@@ -119,8 +119,8 @@ def SemanaFileHPCN(file):
 
                         mes = 0
                         ano += 1
-                        contaanos += 1
-                        print(guardaValores)
+
+
 
 
                     somaDiasMeses = 0 + guardaValores
@@ -142,9 +142,10 @@ def SemanaFileHPCN(file):
 
     with open('DATASET/HPC2N/HPC2N.csv', 'w') as arquivo:
         arquivo.writelines(linhasAtualizadas)
+    print("HPC2N -- FEITO")
 
 
-#NOTFINISHED
+#FEITO
 def SemanaFileSDSCBlue(file):
     linhasAtualizadas = []
     segundosDia = 86400
@@ -156,7 +157,7 @@ def SemanaFileSDSCBlue(file):
     ano = 2000
     inicio = 4
     guardaValores = 30 - 25
-    with open(file, 'r') as ficheiro:
+    with open(file, 'r') as ficheiro,open('DATASET/SDSC BLUE/SDSC-BLUE.csv', 'w') as arquivo:
         contador = 0
         somaDiasMeses = 0
 
@@ -166,11 +167,12 @@ def SemanaFileSDSCBlue(file):
                 SubmitTime = int(info[1]) + 3  # Estes 3 segundos são devido ao início 0:0:3
                 horas, min, segundos = CalculaHorasMinSegundos(SubmitTime)
                 horas += 15
+
                 horas = horas % 24
 
                 valor = int(SubmitTime) // segundosDia
-               # print(valor)
-                diaAux = (valor - somaDiasMeses  + dia)
+
+                diaAux = (valor - somaDiasMeses + dia)
                 DiaF = diaAux
 
                 if diaAux > DiasMeses[mes]:
@@ -180,17 +182,21 @@ def SemanaFileSDSCBlue(file):
                     dia = 1
                     if mes == 12:
                         # Se o mês atual for dezembro, ajusta o ano e volta para janeiro
+                        for i in range(inicio, mes):
+                            guardaValores += DiasMeses[i]
+
                         inicio = 0
 
                         mes = 0
                         ano += 1
-                        dia = 1
+
+
 
                     somaDiasMeses = 0 + guardaValores
-                    for i in range(inicio,mes):
+                    for i in range(inicio, mes):
                         somaDiasMeses += DiasMeses[i]
 
-                    dia = 0
+                    dia = 1
                     valor = valor % 7
                     DiaF = 1
 
@@ -200,9 +206,9 @@ def SemanaFileSDSCBlue(file):
                 linha = linha[:-1] + "Dia de Semana" + ";" + "Dia" + ";" + "Mês" + ";" + "Ano" + ";" + "Horas" + ";" + "Minutos" + ";" + "Segundos" + '\n'
             linhasAtualizadas.append(linha)
             contador += 1
+            arquivo.write(linha)
+    print("SDSC BLUE -- FEITO")
 
-    with open('DATASET/SDSC BLUE/SDSC-BLUE.csv', 'w') as arquivo:
-        arquivo.writelines(linhasAtualizadas)
 
 
 
@@ -253,7 +259,7 @@ def SemanaFileSDSC96(file):
                         mes = 0
                         ano += 1
                         contaanos += 1
-                        print(guardaValores)
+
 
 
                     somaDiasMeses = 0 + guardaValores
@@ -276,6 +282,8 @@ def SemanaFileSDSC96(file):
     with open('DATASET/SDSC 96/SDSC96.csv', 'w') as arquivo:
         arquivo.writelines(linhasAtualizadas)
 
+    print("SDSC 96 -- FEITO")
+
 
 
 
@@ -293,24 +301,24 @@ if __name__ == '__main__':
         compor(new_file, file)
 
 
-    ## NASA FEITO
-    if ColumData:
+
+    if ColumData2:
         file = "DATASET/NASA/NASA-CompostoF.csv"
         SemanaFileNASA(file)
 
-    ## HPC2N FEITO
-    if ColumData:
+
+    if ColumData2:
         file = "DATASET/HPC2N/HPC2N-CompostoF.csv"
         SemanaFileHPCN(file)
 
-    ## AINDA NÃO --> NAO VAI DAR, NAO EXECUTA ATÉ ao FIM
+
     if ColumData2:
         file = "DATASET/SDSC BLUE/SDSC-BLUE-CompostoF.csv"
         SemanaFileSDSCBlue(file)
 
 
-    # FEITO MAS .....
-    if ColumData:
+
+    if ColumData2:
         file = "DATASET/SDSC 96/SDSC-Par-CompostoF.csv"
         SemanaFileSDSC96(file)
 
